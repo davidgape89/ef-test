@@ -7,3 +7,5 @@ export interface EnvConfig {
 
 export const Config: EnvConfig = JSON.parse('<%= ENV_CONFIG %>');
 
+export const SERV_URL: string = 'ws://54.228.248.101:8888/telemetry'
+

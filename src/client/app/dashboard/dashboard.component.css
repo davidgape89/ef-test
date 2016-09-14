@@ -1,3 +1,5 @@
-p {
-    background-image: url("src/client/assets/bg.png");
+.dashboard {
+    background-image: url("/assets/images/bg.png");
+    height: 600px;
+    width: 1000px;
 }

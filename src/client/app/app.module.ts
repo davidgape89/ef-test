@@ -8,6 +8,7 @@ import { routes } from './app.routes';
 
 import {DashboardModule} from './dashboard/dashboard.module';
 import { SharedModule } from './shared/shared.module';
+import { WebSocketService } from './shared/index';
 
 @NgModule({
   imports: [BrowserModule, HttpModule, RouterModule.forRoot(routes), DashboardModule, SharedModule.forRoot()],
@@ -15,7 +16,7 @@ import { SharedModule } from './shared/shared.module';
   providers: [{
     provide: APP_BASE_HREF,
     useValue: '<%= APP_BASE %>'
-  }],
+  }, WebSocketService],
   bootstrap: [AppComponent]
 
 })

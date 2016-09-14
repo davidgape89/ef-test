@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-//import { NameListService } from '../shared/index';
+import { DashboardService } from '../shared/index';
 
 /**
  * This class represents the lazy loaded HomeComponent.
@@ -9,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
   selector: 'sd-dashboard',
   templateUrl: 'dashboard.component.html',
   styleUrls: ['dashboard.component.css'],
+  providers: [DashboardService]
 })
 
 export class DashboardComponent implements OnInit {
 
+  private _dashboardService: DashboardService;
   newName: string = '';
   errorMessage: string;
   names: any[] = [];
@@ -24,7 +26,12 @@ export class DashboardComponent implements OnInit {
    *
    * @param {NameListService} nameListService - The injected NameListService.
    */
-  constructor() {}
+  constructor(dashboardService: DashboardService) {
+    this._dashboardService = dashboardService;
+    this._dashboardService.messages.subscribe(msg => {
+      console.log(msg);
+    });
+  }
 
   /**
    * Initializes after rendering OnInit
