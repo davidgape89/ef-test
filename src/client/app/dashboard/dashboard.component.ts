@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DashboardService } from '../shared/index';
+import {DashboardService} from '../shared/index';
 
 /**
  * This class represents the lazy loaded HomeComponent.
@@ -8,16 +8,13 @@ import { DashboardService } from '../shared/index';
   moduleId: module.id,
   selector: 'sd-dashboard',
   templateUrl: 'dashboard.component.html',
-  styleUrls: ['dashboard.component.css'],
-  providers: [DashboardService]
+  styleUrls: ['dashboard.component.css']
 })
 
 export class DashboardComponent implements OnInit {
 
   private _dashboardService: DashboardService;
-  newName: string = '';
-  errorMessage: string;
-  names: any[] = [];
+  newName: string = '200';
 
   // TODO - include the new service in the constructor whenever it is implemented
   /**

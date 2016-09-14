@@ -10,7 +10,7 @@ export class DashboardService {
 
     constructor(wsService: WebSocketService) {
 		this.messages = <Subject<any>>wsService
-			.connect(SERV_URL)
+			.connect('wss://echo.websocket.org')
 			.map((response: MessageEvent): any => {
 				let data = JSON.parse(response.data);
 				return {

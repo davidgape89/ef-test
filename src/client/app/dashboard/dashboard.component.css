@@ -3,3 +3,21 @@
     height: 600px;
     width: 1000px;
 }
+
+.leftGauge {
+    position: absolute;
+    top: 120px;
+    left: 118px;
+    height: 235px;
+    width: 235px;
+    /*background-color: pink;*/
+}
+
+.rightGauge {
+    position: absolute;
+    top: 120px;
+    left: 452px;
+    height: 235px;
+    width: 235px;
+    /*background-color: pink;*/
+}

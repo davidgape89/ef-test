@@ -1,0 +1,5 @@
+<div class="big-needle" 
+    [ngStyle]="{'transform': 'rotate('+ this.bigNeedleDeg + 'deg)'}"></div>
+<div *ngIf="smallNeedleDeg" class="small-needle" 
+    [ngStyle]="{'transform': 'rotate('+ this.smallNeedleDeg + 'deg)'}"></div>
+<div class="counter" [ngClass]="{isSpeed: isSpeed}">{{amount}}</div>

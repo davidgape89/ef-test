@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { DashboardComponent } from './dashboard.component';
-import { NameListService } from '../shared/name-list/index';
+import { GaugeComponent } from './gauge/index';
+import { DashboardService } from '../shared/index';
 
 @NgModule({
   imports: [CommonModule, SharedModule],
-  declarations: [DashboardComponent],
+  declarations: [DashboardComponent, GaugeComponent],
   exports: [DashboardComponent],
-  // TODO - Implement new service
-  //providers: [NameListService]
+  providers: [DashboardService]
 })
 export class DashboardModule { }
