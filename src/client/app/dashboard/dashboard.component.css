@@ -46,6 +46,25 @@
 }
 
 /*
+ * Switch styling
+ */
+.switch {
+    background-color: pink;
+    height: 48px;
+    left: 814px;
+    position: absolute;
+    width: 138px;
+}
+
+.top {
+    top: 130px;
+}
+
+.bottom {
+    top: 266px;
+}
+
+/*
  * Status light styling
  */
 .status {

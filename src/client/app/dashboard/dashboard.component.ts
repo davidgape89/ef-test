@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
   public averageAltitude: number = 0;
   public averageSpeed: number = 0;
   public packagesReceived: number = 0;
-  public status: StatusDTO = StatusDTO.On;
+  public status: StatusDTO = StatusDTO.Wait;
   public newName: string = '200';
 
   // TODO - include the new service in the constructor whenever it is implemented
