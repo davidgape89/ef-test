@@ -1,6 +1,26 @@
 <div class="dashboard">
-  <gauge class="leftGauge" [amount]="150" 
+  <!-- Gauges directives -->
+  <gauge class="gauge leftGauge" [amount]="150" 
         [bigNeedleDeg]="200" [isSpeed]="true"></gauge>
-  <gauge class="rightGauge" [amount]="1200.0"
+  <!-- TODO - Maybe a directive for the info would be too much -->
+  <div class="infoPanel leftInfo">
+    <div class="min"> Minimum </div>
+    <div class="max"> Maximum </div>
+    <div class="average"> Average </div>
+  </div>
+  <gauge class="gauge rightGauge" [amount]="1200.0"
         [bigNeedleDeg]="60" [smallNeedleDeg]="275" [isSpeed]="false"></gauge>
+  <div class="infoPanel rightInfo">
+    <div class="min"> Minimum </div>
+    <div class="max"> Maximum </div>
+    <div class="average"> Average </div>
+  </div>
+  <!-- TODO - Switches here -->
+  
+  <!-- TODO - Connection status -->
+  <div class="status">
+    <div *ngIf="status == 0" class="icon off">Disconnected</div> 
+    <div *ngIf="status == 1" class="icon wait">Connecting</div> 
+    <div *ngIf="status == 2" class="icon on">Connected</div> 
+  </div>
 </div>

@@ -8,8 +8,8 @@ import {Component, Input} from '@angular/core';
 })
 export class GaugeComponent {
     @Input() amount: number;
-    @Input() isSpeed: boolean;
     @Input() bigNeedleDeg: string;
+    @Input() isSpeed: boolean;
     @Input() smallNeedleDeg: string;
 
     constructor() {

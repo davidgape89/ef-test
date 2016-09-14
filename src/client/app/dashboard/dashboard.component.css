@@ -1,23 +1,78 @@
+/* 
+ * Sets the background of the dashboard 
+ */
 .dashboard {
     background-image: url("/assets/images/bg.png");
     height: 600px;
     width: 1000px;
 }
 
-.leftGauge {
+/*
+ * Gauges styling 
+ */
+.gauge {
     position: absolute;
     top: 120px;
-    left: 118px;
     height: 235px;
-    width: 235px;
-    /*background-color: pink;*/
+    width: 235px
+}
+
+.leftGauge {
+    left: 118px;
 }
 
 .rightGauge {
-    position: absolute;
-    top: 120px;
     left: 452px;
-    height: 235px;
-    width: 235px;
-    /*background-color: pink;*/
+}
+
+/*
+ * Information Panels styling 
+ */
+.infoPanel {
+    color: white;
+    font-size: 20px;
+    line-height: 30px;
+    position: absolute;
+    text-align: center;
+    top: 413px;    
+}
+
+.leftInfo {
+    left: 195px;
+}
+
+.rightInfo {
+    left: 530px;
+}
+
+/*
+ * Status light styling
+ */
+.status {
+    color: white;
+    font-size: 19px;
+    height: 22px;
+    left: 810px;
+    position: absolute;
+    top: 440px;
+    width: 100px;
+}
+
+.icon {
+    background-repeat: no-repeat;
+    height: 22px;
+    padding-left: 33px;
+    width: 22px;
+}
+
+.on {
+    background-image: url("/assets/images/connection-online.png");
+}
+
+.wait {
+    background-image: url("/assets/images/connection-connecting.png");
+}
+
+.off {
+    background-image: url("/assets/images/connection-offline.png");
 }
