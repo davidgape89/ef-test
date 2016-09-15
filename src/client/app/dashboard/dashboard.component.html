@@ -1,23 +1,24 @@
 <div class="dashboard">
   <!-- Gauges -->
-  <sd-gauge class="gauge leftGauge" [amount]="150" 
-        [bigNeedleDeg]="200" [isSpeed]="true"></sd-gauge>
+  <sd-gauge class="gauge leftGauge" [amount]="telemetry.airspeed" 
+        [bigNeedleDeg]="telemetry.airspeed*360/500" [isSpeed]="true"></sd-gauge>
   <div class="infoPanel leftInfo">
     <div class="min"> Minimum </div>
     <div class="max"> Maximum </div>
-    <div class="average"> Average </div>
+    <div class="average"> {{avTelemetry.airspeed}} </div>
   </div>
-  <sd-gauge class="gauge rightGauge" [amount]="1200.0"
-        [bigNeedleDeg]="60" [smallNeedleDeg]="275" [isSpeed]="false"></sd-gauge>
+  <sd-gauge class="gauge rightGauge" [amount]="telemetry.altitude"
+        [bigNeedleDeg]="(telemetry.altitude)*360/1000" 
+        [smallNeedleDeg]="telemetry.altitude*360/10000" [isSpeed]="false"></sd-gauge>
   <div class="infoPanel rightInfo">
     <div class="min"> Minimum </div>
     <div class="max"> Maximum </div>
-    <div class="average"> Average </div>
+    <div class="average"> {{avTelemetry.altitude}} </div>
   </div>
   <!-- TODO - Switches here -->
-  <sd-switch class="switch top" [current]="currentLanding" [positionNumber]="2"
+  <sd-switch class="switch top" [current]="control.landing_gear" [positionNumber]="2"
           (changed)="landingChanged($event)"></sd-switch>
-  <sd-switch class="switch bottom" [current]="currentFlaps" [positionNumber]="6"
+  <sd-switch class="switch bottom" [current]="control.flaps" [positionNumber]="6"
           (changed)="flapsChanged($event)"></sd-switch>
   <!-- Connection status -->
   <div class="status">

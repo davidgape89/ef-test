@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as Rx from 'rxjs/Rx';
-
-import {ControlMessageDTO} from '../models/ControlMessageDTO';
+import { ControlDTO } from '../models/ControlDTO';
 
 @Injectable()
 export class WebSocketService {
@@ -27,7 +26,8 @@ export class WebSocketService {
 			});
 
 		let observer = {
-			next: (data: ControlMessageDTO) => {
+			next: (data: ControlDTO) => {
+				console.log(data);
 				if (ws.readyState === WebSocket.OPEN) {
 					ws.send(JSON.stringify(data));
 				}

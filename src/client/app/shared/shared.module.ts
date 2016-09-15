@@ -1,6 +1,5 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { WebSocketService } from './services/index';
@@ -12,7 +11,7 @@ import { WebSocketService } from './services/index';
 @NgModule({
   imports: [CommonModule, RouterModule],
   //declarations: [ToolbarComponent, NavbarComponent],
-  exports: [CommonModule, FormsModule, RouterModule]
+  exports: [CommonModule, RouterModule]
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {
