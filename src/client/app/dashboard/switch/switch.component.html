@@ -1,1 +1,6 @@
-<p (click)="triggered()">This is a switch</p>
+<div class="switch" [ngClass]="{'biPos': positions.length == 2}">
+    <div class="position" *ngFor="let position of positions; let i = index;" 
+        [ngStyle]="{'width': posWidth + 'px'}" (click)="updateCurrent(i)"
+        [ngClass]="{'active': i == current, 'on': current == 1, 'off': current == 0}">
+    </div>
+</div>

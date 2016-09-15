@@ -49,19 +49,18 @@
  * Switch styling
  */
 .switch {
-    background-color: pink;
-    height: 48px;
-    left: 814px;
+    height: 52px;
+    left: 812px;
     position: absolute;
-    width: 138px;
+    width: 145px;
 }
 
 .top {
-    top: 130px;
+    top: 129px;
 }
 
 .bottom {
-    top: 266px;
+    top: 265px;
 }
 
 /*

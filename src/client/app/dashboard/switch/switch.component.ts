@@ -1,4 +1,8 @@
-import {Component, Input, Output, OnInit, EventEmitter} from '@angular/core';
+import {Component, Input, Output, OnInit, EventEmitter, ElementRef, Attribute} from '@angular/core';
+
+export interface SwitchPosition {
+    active: boolean
+}
 
 @Component({
     moduleId: module.id,
@@ -8,10 +12,17 @@ import {Component, Input, Output, OnInit, EventEmitter} from '@angular/core';
 })
 export class SwitchComponent implements OnInit{
     @Input() current: number;
-    @Input() positions: number;
-    @Output() positionUpdate = new EventEmitter();
-
-    constructor() {
+    @Input() positionNumber: number;
+    @Output() changed = new EventEmitter();
+    
+    private _switchEl: ElementRef;
+    public positions: Array<any>;
+    public posWidth: number;
+    
+    // Accessing the native element is not recommended, 
+    // but we only obtain the width
+    constructor(switchEl: ElementRef) {
+        this._switchEl = switchEl;
     }
 
     ngOnInit() {
@@ -19,5 +30,14 @@ export class SwitchComponent implements OnInit{
         console.log(this.current);
         console.log(this.positions);
         // TODO - Define the switch properties here
+        this.positions = new Array(this.positionNumber);
+        this.posWidth = this._switchEl.nativeElement.offsetWidth / this.positionNumber;
+        console.log(this.posWidth);
+    }
+
+    public updateCurrent(i: number) {
+        if(i != this.current) {
+            this.changed.emit(i);
+        }
     }
 }

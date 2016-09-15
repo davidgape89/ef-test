@@ -1,0 +1,22 @@
+.switch {
+    display: inline-flex;
+    height: 100%;
+    width: 100%;
+}
+
+.position {
+    background-repeat: no-repeat;
+    height: 100%;
+}
+
+.active {
+    background-image: url("/assets/images/flaps-switch.png");
+}
+
+.biPos .on.active {
+    background-image: url("/assets/images/landing-gear-on.png");
+}
+
+.biPos .off.active {
+    background-image: url("/assets/images/landing-gear-off.png");
+}

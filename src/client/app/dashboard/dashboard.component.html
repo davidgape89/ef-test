@@ -15,8 +15,10 @@
     <div class="average"> Average </div>
   </div>
   <!-- TODO - Switches here -->
-  <switch class="switch top" [current]="0" [positions]="2"></switch>
-  <switch class="switch bottom" [current]="0" [positions]="5"></switch>
+  <switch class="switch top" [current]="currentLanding" [positionNumber]="2"
+          (changed)="landingChanged($event)"></switch>
+  <switch class="switch bottom" [current]="currentFlaps" [positionNumber]="6"
+          (changed)="flapsChanged($event)"></switch>
   <!-- Connection status -->
   <div class="status">
     <div *ngIf="status == 0" class="icon off">Disconnected</div> 

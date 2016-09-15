@@ -20,7 +20,8 @@ export class DashboardComponent implements OnInit {
   public averageSpeed: number = 0;
   public packagesReceived: number = 0;
   public status: StatusDTO = StatusDTO.Wait;
-  public newName: string = '200';
+  public currentFlaps: number = 0;
+  public currentLanding: boolean = false;
 
   // TODO - include the new service in the constructor whenever it is implemented
   /**
@@ -43,6 +44,16 @@ export class DashboardComponent implements OnInit {
    */
   ngOnInit() {
     
+  }
+
+  public landingChanged(event: number) {
+    this.currentLanding = event === 1;
+    console.log("Landing changed to ", event);
+  }
+
+  public flapsChanged(event: number) {
+    this.currentFlaps = event;
+    console.log("Flaps changed to ", event);
   }
 
 }
