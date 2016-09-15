@@ -1,4 +1,4 @@
-import {Component, Input, Output, OnInit, EventEmitter, ElementRef, Attribute} from '@angular/core';
+import {Component, Input, Output, OnInit, EventEmitter, ElementRef} from '@angular/core';
 
 export interface SwitchPosition {
     active: boolean
@@ -6,7 +6,7 @@ export interface SwitchPosition {
 
 @Component({
     moduleId: module.id,
-    selector: 'switch',
+    selector: 'sd-switch',
     templateUrl: 'switch.component.html',
     styleUrls: ['switch.component.css']
 })
@@ -14,10 +14,11 @@ export class SwitchComponent implements OnInit{
     @Input() current: number;
     @Input() positionNumber: number;
     @Output() changed = new EventEmitter();
-    
-    private _switchEl: ElementRef;
+
     public positions: Array<any>;
     public posWidth: number;
+
+    private _switchEl: ElementRef;
     
     // Accessing the native element is not recommended, 
     // but we only obtain the width
@@ -36,7 +37,7 @@ export class SwitchComponent implements OnInit{
     }
 
     public updateCurrent(i: number) {
-        if(i != this.current) {
+        if(i !== this.current) {
             this.changed.emit(i);
         }
     }

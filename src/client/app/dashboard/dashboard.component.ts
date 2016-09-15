@@ -1,10 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {DashboardService} from '../shared/index';
 import {StatusDTO} from '../shared/index';
 
-/**
- * This class represents the lazy loaded HomeComponent.
- */
 @Component({
   moduleId: module.id,
   selector: 'sd-dashboard',
@@ -12,21 +9,21 @@ import {StatusDTO} from '../shared/index';
   styleUrls: ['dashboard.component.css']
 })
 
-export class DashboardComponent implements OnInit {
-
-  private _dashboardService: DashboardService;
-  
+export class DashboardComponent {
+  public currentAltitude: number = 0;
   public averageAltitude: number = 0;
+  public currentSpeed: number = 0;
   public averageSpeed: number = 0;
   public packagesReceived: number = 0;
-  public status: StatusDTO = StatusDTO.Wait;
+  public status: StatusDTO = StatusDTO.Off;
   public currentFlaps: number = 0;
   public currentLanding: boolean = false;
 
-  // TODO - include the new service in the constructor whenever it is implemented
+  private _dashboardService: DashboardService;
+
   /**
-   * Creates an instance of the HomeComponent with the injected
-   * NameListService.
+   * Creates an instance of the DashboardComponent with the injected
+   * DashboardService.
    *
    * @param {NameListService} nameListService - The injected NameListService.
    */
@@ -40,20 +37,21 @@ export class DashboardComponent implements OnInit {
   }
 
   /**
-   * Initializes after rendering OnInit
+   * Updates the landing gear attribute.
+   *
+   * @param {number} event Number of the current value.
    */
-  ngOnInit() {
-    
-  }
-
   public landingChanged(event: number) {
     this.currentLanding = event === 1;
-    console.log("Landing changed to ", event);
   }
 
+  /**
+   * Updates the flaps attribute.
+   *
+   * @param {number} event Number of the current value.
+   */
   public flapsChanged(event: number) {
     this.currentFlaps = event;
-    console.log("Flaps changed to ", event);
   }
 
 }

@@ -1,4 +1,4 @@
-/*import { Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TestBed } from '@angular/core/testing';
 import { APP_BASE_HREF } from '@angular/common';
@@ -13,22 +13,23 @@ import {
   RouterTestingModule
 } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { GaugeComponent } from './dashboard/gauge/gauge.component';
+import { SwitchComponent } from './dashboard/switch/switch.component';
+
 
 export function main() {
 
   describe('App component', () => {
 
     let config: Route[] = [
-      { path: '', component: HomeComponent },
-      { path: 'about', component: AboutComponent }
+      { path: '', component: DashboardComponent }
     ];
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [FormsModule, RouterTestingModule.withRoutes(config)],
-        declarations: [TestComponent, ToolbarComponent,
-          NavbarComponent, AppComponent,
-          HomeComponent, AboutComponent],
+        declarations: [TestComponent, AppComponent,
+          DashboardComponent, GaugeComponent, SwitchComponent],
         providers: [
           { provide: APP_BASE_HREF, useValue: '/' }
         ]
@@ -55,7 +56,7 @@ export function main() {
 })
 
 class TestComponent {
-}*/
+}
 
 
 

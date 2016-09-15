@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 
 @Component({
     moduleId: module.id,
-    selector: 'gauge',
+    selector: 'sd-gauge',
     templateUrl: 'gauge.component.html',
     styleUrls: ['gauge.component.css']
 })
@@ -12,6 +12,4 @@ export class GaugeComponent {
     @Input() isSpeed: boolean;
     @Input() smallNeedleDeg: string;
 
-    constructor() {
-    }
 }

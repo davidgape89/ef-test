@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs/Rx';
+import { Subject } from 'rxjs/Rx';
 import {WebSocketService } from './websocket.service';
 import {SERV_URL} from '../config/env.config';
 
@@ -17,7 +17,7 @@ export class DashboardService {
 					author: data.author,
 					message: data.message,
 					newDate : data.newDate
-				}
+				};
 			});
 	}
 }
