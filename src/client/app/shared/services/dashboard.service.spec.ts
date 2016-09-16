@@ -11,7 +11,7 @@ export function main() {
         }
     }
 
-    describe('Dashboard Service', () => {
+    describe('Dashboard service', () => {
         let dashboardService: DashboardService;
         subject = new Rx.Subject;
 
