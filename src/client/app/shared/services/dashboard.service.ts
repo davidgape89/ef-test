@@ -17,7 +17,7 @@ export class DashboardService {
 					return data;
 				} catch(err) {
 					return response.data;
-				}			
+				}
 			});
 	}
 }

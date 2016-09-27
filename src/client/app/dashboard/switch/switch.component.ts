@@ -6,7 +6,7 @@ import {Component, Input, Output, OnInit, EventEmitter, ElementRef} from '@angul
     templateUrl: 'switch.component.html',
     styleUrls: ['switch.component.css']
 })
-export class SwitchComponent implements OnInit{
+export class SwitchComponent implements OnInit {
     @Input() current: number;
     @Input() positionNumber: number;
     @Output() changed = new EventEmitter();
@@ -15,7 +15,7 @@ export class SwitchComponent implements OnInit{
     public posWidth: number;
 
     private _switchEl: ElementRef;
-    
+
     // Accessing the native element is not recommended, 
     // but we only obtain the width
     constructor(switchEl: ElementRef) {

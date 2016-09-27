@@ -33,5 +33,5 @@ export function main() {
             expect(dashboardService.messages).toEqual(jasmine.any(Rx.Subject));
         });
 
-    })
+    });
 }

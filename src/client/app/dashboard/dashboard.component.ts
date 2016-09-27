@@ -35,22 +35,20 @@ export class DashboardComponent {
     this.telemetry = {
       airspeed: 0,
       altitude: 0
-    }
+    };
 
     this.avTelemetry = {
       airspeed: 0,
       altitude: 0
-    }
+    };
 
     this._dashboardService = dashboardService;
 
     // Set up the subscription
     this._dashboardService.messages.subscribe((response: ResponseMessageDTO | string) => {
       // Check if it is the initial or the final string
-      if(typeof response === 'string'){
-        console.log(response);
-        if(response === 'hello, world') this.status = StatusDTO.On;
-        else this.status = StatusDTO.Off;
+      if(typeof response === 'string') {
+        this.status = (response === 'hello, world')? StatusDTO.On: StatusDTO.Off;
       } else {
         this.updateData(response);
       }
@@ -64,7 +62,7 @@ export class DashboardComponent {
    */
   public landingChanged(event: number) {
     this.control.landing_gear = event;
-    this.sendControl();
+    this._sendControl();
   }
 
   /**
@@ -74,19 +72,7 @@ export class DashboardComponent {
    */
   public flapsChanged(event: number) {
     this.control.flaps = event;
-    this.sendControl();
-  }
-
-  /**
-   * Sends a control message to the aircraft.
-   *
-   * @param {number} event Number of the current value.
-   */
-  public sendControl() {
-    console.log('Send control');
-    if(this.control) {
-      this._dashboardService.messages.next(this.control);
-    }
+    this._sendControl();
   }
 
   /**
@@ -96,9 +82,9 @@ export class DashboardComponent {
    */
   public updateData(response: ResponseMessageDTO) {
     this.packagesReceived++;
-    
+
     // Set airspeed average
-    if(this.avTelemetry.airspeed === 0){
+    if(this.avTelemetry.airspeed === 0) {
       this.avTelemetry.airspeed = response.telemetry.airspeed;
     } else {
       this.avTelemetry.airspeed -= this.avTelemetry.airspeed / this.packagesReceived;
@@ -107,7 +93,7 @@ export class DashboardComponent {
     this.avTelemetry.airspeed = Math.floor(this.avTelemetry.airspeed * 100) / 100;
 
     // Set altitude average
-    if(this.avTelemetry.altitude === 0){
+    if(this.avTelemetry.altitude === 0) {
       this.avTelemetry.altitude = response.telemetry.altitude;
     } else {
       this.avTelemetry.altitude -= this.avTelemetry.altitude / this.packagesReceived;
@@ -117,7 +103,15 @@ export class DashboardComponent {
 
     this.telemetry = response.telemetry;
     this.control = response.control;
-    console.log(response);
+  }
+
+  /**
+   * Sends a control message to the aircraft.
+   *
+   * @param {number} event Number of the current value.
+   */
+  private _sendControl() {
+    this._dashboardService.messages.next(this.control);
   }
 
 }
