@@ -35,6 +35,28 @@ export function main() {
         }
     };
 
+    let wrongAirMock: ResponseMessageDTO = {
+        control: {
+            flaps: 1,
+            landing_gear: 2
+        },
+        telemetry: {
+            airspeed: -400,
+            altitude: 3000
+        }
+    };
+
+    let wrongAltMock: ResponseMessageDTO = {
+        control: {
+            flaps: 1,
+            landing_gear: 2
+        },
+        telemetry: {
+            airspeed: 400,
+            altitude: -3000
+        }
+    };
+
     // Mock service
     class DashboardMockService {
         public messages: Subject<any>;
@@ -91,6 +113,28 @@ export function main() {
                 flaps: 1,
                 landing_gear: 2
             });
+            expect(dashComp.telemetry).toEqual({
+                airspeed: 200,
+                altitude: 2500
+            });
+            expect(dashComp.avTelemetry).toEqual({
+                airspeed: 200,
+                altitude: 2500
+            });
+        });
+
+        it('should not update data if it is wrong', () => {
+            subject.next(dataMock1);
+            subject.next(wrongAirMock);
+            expect(dashComp.telemetry).toEqual({
+                airspeed: 200,
+                altitude: 2500
+            });
+            expect(dashComp.avTelemetry).toEqual({
+                airspeed: 200,
+                altitude: 2500
+            });
+            subject.next(wrongAltMock);
             expect(dashComp.telemetry).toEqual({
                 airspeed: 200,
                 altitude: 2500

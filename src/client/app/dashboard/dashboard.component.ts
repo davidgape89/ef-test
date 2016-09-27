@@ -81,10 +81,12 @@ export class DashboardComponent {
    * @param {ResponseMessageDTO} response Control and telemetry data received.
    */
   public updateData(response: ResponseMessageDTO) {
-    this.packagesReceived++;
+    // Ignore data if it is wrong
+    if(response.telemetry.airspeed > 0
+      && response.telemetry.altitude > 0) {
+      this.packagesReceived++;
 
-    // Set airspeed average
-    if(response.telemetry.airspeed > 0){
+      // Set airspeed average
       if(this.avTelemetry.airspeed === 0) {
         this.avTelemetry.airspeed = response.telemetry.airspeed;
       } else {
@@ -93,10 +95,8 @@ export class DashboardComponent {
       }
       this.avTelemetry.airspeed = Math.floor(this.avTelemetry.airspeed * 100) / 100;
       this.telemetry.airspeed = response.telemetry.airspeed;
-    }
 
-    // Set altitude average
-    if(response.telemetry.altitude > 0) {
+      // Set altitude average
       if(this.avTelemetry.altitude === 0) {
         this.avTelemetry.altitude = response.telemetry.altitude;
       } else {
@@ -105,8 +105,10 @@ export class DashboardComponent {
         this.avTelemetry.altitude = Math.floor(this.avTelemetry.altitude * 100) / 100;
       }
       this.telemetry.altitude = response.telemetry.altitude;
+
     }
 
+    // Set control data
     this.control = response.control;
   }
 
