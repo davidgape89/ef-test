@@ -84,24 +84,29 @@ export class DashboardComponent {
     this.packagesReceived++;
 
     // Set airspeed average
-    if(this.avTelemetry.airspeed === 0) {
-      this.avTelemetry.airspeed = response.telemetry.airspeed;
-    } else {
-      this.avTelemetry.airspeed -= this.avTelemetry.airspeed / this.packagesReceived;
-      this.avTelemetry.airspeed += response.telemetry.airspeed / this.packagesReceived;
+    if(response.telemetry.airspeed > 0){
+      if(this.avTelemetry.airspeed === 0) {
+        this.avTelemetry.airspeed = response.telemetry.airspeed;
+      } else {
+        this.avTelemetry.airspeed -= this.avTelemetry.airspeed / this.packagesReceived;
+        this.avTelemetry.airspeed += response.telemetry.airspeed / this.packagesReceived;
+      }
+      this.avTelemetry.airspeed = Math.floor(this.avTelemetry.airspeed * 100) / 100;
+      this.telemetry.airspeed = response.telemetry.airspeed;
     }
-    this.avTelemetry.airspeed = Math.floor(this.avTelemetry.airspeed * 100) / 100;
 
     // Set altitude average
-    if(this.avTelemetry.altitude === 0) {
-      this.avTelemetry.altitude = response.telemetry.altitude;
-    } else {
-      this.avTelemetry.altitude -= this.avTelemetry.altitude / this.packagesReceived;
-      this.avTelemetry.altitude += response.telemetry.altitude / this.packagesReceived;
+    if(response.telemetry.altitude > 0) {
+      if(this.avTelemetry.altitude === 0) {
+        this.avTelemetry.altitude = response.telemetry.altitude;
+      } else {
+        this.avTelemetry.altitude -= this.avTelemetry.altitude / this.packagesReceived;
+        this.avTelemetry.altitude += response.telemetry.altitude / this.packagesReceived;
+        this.avTelemetry.altitude = Math.floor(this.avTelemetry.altitude * 100) / 100;
+      }
+      this.telemetry.altitude = response.telemetry.altitude;
     }
-    this.avTelemetry.altitude = Math.floor(this.avTelemetry.altitude * 100) / 100;
 
-    this.telemetry = response.telemetry;
     this.control = response.control;
   }
 
