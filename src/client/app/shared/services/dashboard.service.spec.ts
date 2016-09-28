@@ -1,21 +1,35 @@
 import { ReflectiveInjector } from '@angular/core';
 import { DashboardService } from './dashboard.service';
 import { WebSocketService } from './websocket.service';
-import {Subject, Observable} from 'rxjs/Rx';
+import { ResponseMessageDTO } from '../models/index';
+import { Subject } from 'rxjs/Rx';
 
 export function main() {
-    let subject: Subject<any> = new Subject;
+    let subject: Subject<any>;
+    let dashboardService: DashboardService;
+    let stringResponse: any = {
+        data: 'Hello, world'
+    };
+    let dataResponse: ResponseMessageDTO =  {
+        control: {
+            flaps: 1,
+            landing_gear: 2
+        },
+        telemetry: {
+            airspeed: 400,
+            altitude: 3000
+        }
+    };
+    
     class MockWebSocketService {
-        public connect(url: string): Observable<any> {
-            console.log('returning subject', subject);
+        public connect(url: string): Subject<any> {
             return subject;
         }
     }
 
     describe('Dashboard service', () => {
-        let dashboardService: DashboardService;
-
         beforeEach(() => {
+            subject = new Subject;
             let injector = ReflectiveInjector.resolveAndCreate([
                 DashboardService,
                 {provide: WebSocketService,
@@ -33,19 +47,20 @@ export function main() {
             expect(dashboardService.messages).toEqual(jasmine.any(Subject));
         });
 
-        it('should map the response correctly', () => {
+        it('should map the response correctly if it is a string', () => {
             dashboardService.messages.subscribe((response) => {
-                console.log(response);
+                expect(response).toEqual('Hello, world');
             });
-            console.log(dashboardService.messages);
+            subject.next(stringResponse);
+        });
+
+        it('should map the response correctly if it is a data message', () => {
+            dashboardService.messages.subscribe((response) => {
+                expect(response).toEqual(dataResponse);
+            });
             subject.next({
-                response: {
-                    data: {
-                        string: 'this is data'
-                    }
-                }
+                data: dataResponse
             });
-            expect(true).toBe(true);
         });
 
     });

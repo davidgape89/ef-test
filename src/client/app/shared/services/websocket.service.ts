@@ -29,7 +29,6 @@ export class WebSocketService {
 
 		let observer = {
 			next: (data: ControlDTO) => {
-				console.log(data);
 				if (ws.readyState === WebSocket.OPEN) {
 					ws.send(JSON.stringify(data));
 				}

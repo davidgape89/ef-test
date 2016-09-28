@@ -44,7 +44,7 @@ export class DashboardComponent {
 
     this._dashboardService = dashboardService;
 
-    // Set up the subscription
+    // Set up the subscription (success, error, finished)
     this._dashboardService.messages.subscribe((response: ResponseMessageDTO | string) => {
       // Check if it is the initial or the final string
       if(typeof response === 'string') {

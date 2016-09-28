@@ -12,12 +12,7 @@ export class DashboardService {
 		this.messages = <Subject<any>>wsService
 			.connect(SERV_URL)
 			.map((response: MessageEvent): any => {
-				try {
-					let data = JSON.parse(response.data);
-					return data;
-				} catch(err) {
-					return response.data;
-				}
+				return response.data;
 			});
 	}
 }
