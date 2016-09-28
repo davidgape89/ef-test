@@ -1,19 +1,19 @@
 import { ReflectiveInjector } from '@angular/core';
 import { DashboardService } from './dashboard.service';
 import { WebSocketService } from './websocket.service';
-import * as Rx from 'rxjs/Rx';
+import {Subject, Observable} from 'rxjs/Rx';
 
 export function main() {
-    let subject: Rx.Subject<any>;
+    let subject: Subject<any> = new Subject;
     class MockWebSocketService {
-        public connect(url: string): Rx.Observable<any> {
+        public connect(url: string): Observable<any> {
+            console.log('returning subject', subject);
             return subject;
         }
     }
 
     describe('Dashboard service', () => {
         let dashboardService: DashboardService;
-        subject = new Rx.Subject;
 
         beforeEach(() => {
             let injector = ReflectiveInjector.resolveAndCreate([
@@ -30,7 +30,22 @@ export function main() {
         });
 
         it('should return an observable', () => {
-            expect(dashboardService.messages).toEqual(jasmine.any(Rx.Subject));
+            expect(dashboardService.messages).toEqual(jasmine.any(Subject));
+        });
+
+        it('should map the response correctly', () => {
+            dashboardService.messages.subscribe((response) => {
+                console.log(response);
+            });
+            console.log(dashboardService.messages);
+            subject.next({
+                response: {
+                    data: {
+                        string: 'this is data'
+                    }
+                }
+            });
+            expect(true).toBe(true);
         });
 
     });
