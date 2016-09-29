@@ -17,7 +17,7 @@ export class SwitchComponent implements OnInit {
     private _switchEl: ElementRef;
 
     // Accessing the native element is not recommended, 
-    // but we only obtain the width
+    // but it is only in order to obtain the width
     constructor(switchEl: ElementRef) {
         this._switchEl = switchEl;
     }
@@ -27,6 +27,11 @@ export class SwitchComponent implements OnInit {
         this.posWidth = this._switchEl.nativeElement.offsetWidth / this.positionNumber;
     }
 
+    /**
+     * Updates the current position.
+     *
+     * @param {number} i - New position.
+     */
     public updateCurrent(i: number) {
         if(i !== this.current) {
             this.changed.emit(i);
