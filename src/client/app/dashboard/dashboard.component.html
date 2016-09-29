@@ -1,4 +1,7 @@
 <div class="dashboard">
+  <div [ng2-highcharts]="speedOptions" class="graph airgraph"></div>
+  <div [ng2-highcharts]="altitudeOptions" class="graph altigraph"></div>
+
   <!-- Gauges -->
   <sd-gauge class="gauge leftGauge" [amount]="telemetry.airspeed" 
         [bigNeedleDeg]="telemetry.airspeed*360/500" [isSpeed]="true"></sd-gauge>
@@ -26,4 +29,5 @@
     <div *ngIf="status == 1" class="icon wait">Connecting</div> 
     <div *ngIf="status == 2" class="icon on">Connected</div> 
   </div>
+
 </div>

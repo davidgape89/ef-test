@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {DashboardService} from '../shared/index';
 import {StatusDTO} from '../shared/index';
 import {ResponseMessageDTO, TelemetryDTO, ControlDTO} from '../shared/models/index';
+import {Ng2Highcharts, Ng2Highmaps} from 'ng2-highcharts';
 
 @Component({
   moduleId: module.id,
@@ -16,6 +17,10 @@ export class DashboardComponent {
   public packagesReceived: number = 0;
   public status: StatusDTO = StatusDTO.Wait;
   public control: ControlDTO;
+  public speedArray: Array<number> = [0];
+  public speedOptions: any;
+  public altitudeArray: Array<number> = [0];
+  public altitudeOptions: any; 
 
   private _dashboardService: DashboardService;
 
@@ -40,6 +45,32 @@ export class DashboardComponent {
     this.avTelemetry = {
       airspeed: 0,
       altitude: 0
+    };
+
+    this.speedOptions = {
+      chart: {
+        type: 'line'
+      },
+      title: {
+        text: 'Airspeed'
+      },
+      series: [{
+        name: '',
+        data: this.speedArray
+      }]
+    };
+
+    this.altitudeOptions = {
+      chart: {
+        type: 'line'
+      },
+      title: {
+        text: 'Altitude'
+      },
+      series: [{
+        name: '',
+        data: this.altitudeArray
+      }]
     };
 
     this._dashboardService = dashboardService;
@@ -104,9 +135,11 @@ export class DashboardComponent {
       } else {
         this.avTelemetry.airspeed -= this.avTelemetry.airspeed / this.packagesReceived;
         this.avTelemetry.airspeed += response.telemetry.airspeed / this.packagesReceived;
+        this.avTelemetry.airspeed = Math.floor(this.avTelemetry.airspeed * 100) / 100;
       }
-      this.avTelemetry.airspeed = Math.floor(this.avTelemetry.airspeed * 100) / 100;
+      
       this.telemetry.airspeed = response.telemetry.airspeed;
+      this.speedArray.push(this.telemetry.airspeed);
 
       // Set altitude average
       if(this.avTelemetry.altitude === 0) {
@@ -117,7 +150,9 @@ export class DashboardComponent {
         this.avTelemetry.altitude = Math.floor(this.avTelemetry.altitude * 100) / 100;
       }
       this.telemetry.altitude = response.telemetry.altitude;
+      this.altitudeArray.push(this.telemetry.altitude);
 
+      console.log(this.altitudeArray);
     }
 
     // Set control data

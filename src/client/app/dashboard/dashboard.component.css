@@ -8,6 +8,24 @@
 }
 
 /*
+ * graphs
+ */
+.graph {
+    position: absolute;
+    height: 300px;
+    width: 500px;
+    top: 600px;
+}
+
+.airgraph {
+    left: 0px;
+}
+
+.altigraph {
+    left: 500px;
+}
+
+/*
  * Gauges styling 
  */
 .gauge {
@@ -94,3 +112,4 @@
 .off {
     background-image: url("/assets/images/connection-offline.png");
 }
+
