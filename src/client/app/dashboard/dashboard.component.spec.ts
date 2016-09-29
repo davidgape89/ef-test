@@ -103,7 +103,7 @@ export function main() {
             expect(dashComp.status).toBe(StatusDTO.Wait);
             subject.next('hello, world');
             expect(dashComp.status).toBe(StatusDTO.On);
-            subject.next('This is not the hello world string');
+            subject.complete();
             expect(dashComp.status).toBe(StatusDTO.Off);
         });
 

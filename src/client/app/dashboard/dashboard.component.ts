@@ -45,14 +45,26 @@ export class DashboardComponent {
     this._dashboardService = dashboardService;
 
     // Set up the subscription (success, error, finished)
-    this._dashboardService.messages.subscribe((response: ResponseMessageDTO | string) => {
-      // Check if it is the initial or the final string
-      if(typeof response === 'string') {
-        this.status = (response === 'hello, world')? StatusDTO.On: StatusDTO.Off;
-      } else {
-        this.updateData(response);
-      }
-    });
+    this._dashboardService.messages.subscribe(
+      // on message
+      (response: ResponseMessageDTO | string) => {
+        // Set the connection to on when it is the initial string
+        if(typeof response === 'string') {
+          if(response === 'hello, world') {
+            this.status = StatusDTO.On;
+          }
+        } else {
+          this.updateData(response);
+        }
+      },
+      // on error
+      (error: string) => {
+        console.error(error);
+      },
+      // on close
+      () => {
+        this.status = StatusDTO.Off;
+      });
   }
 
   /**

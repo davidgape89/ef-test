@@ -1,6 +1,5 @@
 import { WebSocketService } from './websocket.service';
 import { ReflectiveInjector } from '@angular/core';
-import { ControlDTO } from '../models/index';
 import { Subject } from 'rxjs/Rx';
 
 export function main() {
@@ -8,9 +7,27 @@ export function main() {
         public readyState: any = WebSocket.CLOSED;
 
         constructor(url: string) {
+            //constructor
         }
 
         public send(request: any) {
+            //send method
+        }
+
+        public onmessage(request: any) {
+            //onmessage method
+        }
+
+        public onerror(event: any) {
+            //onerror method
+        }
+
+        public onclose(event: any) {
+            //onclose method
+        }
+
+        public close() {
+            //close method
         }
     }
 
@@ -22,7 +39,7 @@ export function main() {
             let injector = ReflectiveInjector.resolveAndCreate([
                 WebSocketService
             ]);
- 
+
             webSocketService = injector.get(WebSocketService);
             spyOn(window, 'WebSocket').and.callFake(function(url: any) {
                 ws = new MockSocket(url);
@@ -46,7 +63,6 @@ export function main() {
             let spy = spyOn(ws, 'send');
             subject.next('request');
             expect(spy.calls.any()).toEqual(false);
-            //expect(WebSocket.prototype.send).toHaveBeenCalled();
         });
 
         it('it should not send data when the socket is open', () => {
@@ -54,8 +70,15 @@ export function main() {
             ws.readyState = WebSocket.OPEN;
             let spy = spyOn(ws, 'send');
             subject.next('request');
-            expect(spy).toHaveBeenCalled();
-            //expect(WebSocket.prototype.send).toHaveBeenCalled();
+            expect(spy).toHaveBeenCalledWith('"request"');
+        });
+
+        it('it should send the response to its subscribers', () => {
+            let subject: Subject<any> = webSocketService.connect('ws://url');
+            subject.subscribe((response: any) => {
+                expect(response).toBe('Hello, world!');
+            });
+            ws.onmessage('Hello, world!');
         });
 
     });

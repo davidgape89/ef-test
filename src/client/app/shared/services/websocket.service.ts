@@ -23,7 +23,6 @@ export class WebSocketService {
 				ws.onmessage = obs.next.bind(obs);
 				ws.onerror = obs.error.bind(obs);
 				ws.onclose = obs.complete.bind(obs);
-
 				return ws.close.bind(ws);
 			});
 

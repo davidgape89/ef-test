@@ -1,7 +1,6 @@
 import { ReflectiveInjector } from '@angular/core';
 import { DashboardService } from './dashboard.service';
 import { WebSocketService } from './websocket.service';
-import { ResponseMessageDTO } from '../models/index';
 import { Subject } from 'rxjs/Rx';
 
 export function main() {
@@ -10,17 +9,8 @@ export function main() {
     let stringResponse: any = {
         data: 'Hello, world'
     };
-    let dataResponse: ResponseMessageDTO =  {
-        control: {
-            flaps: 1,
-            landing_gear: 2
-        },
-        telemetry: {
-            airspeed: 400,
-            altitude: 3000
-        }
-    };
-    
+    let dataResponse: string =  '{"control":{"flaps": 1,"landing_gear": 2}, "telemetry": {"airspeed": 400,"altitude": 3000}}';
+
     class MockWebSocketService {
         public connect(url: string): Subject<any> {
             return subject;
@@ -56,7 +46,16 @@ export function main() {
 
         it('should map the response correctly if it is a data message', () => {
             dashboardService.messages.subscribe((response) => {
-                expect(response).toEqual(dataResponse);
+                expect(response).toEqual({
+                    control: {
+                        flaps: 1,
+                        landing_gear: 2
+                    },
+                    telemetry: {
+                        airspeed: 400,
+                        altitude: 3000
+                    }
+                });
             });
             subject.next({
                 data: dataResponse
