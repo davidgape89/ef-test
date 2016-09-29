@@ -26,7 +26,7 @@ export class DashboardComponent {
    * @param {NameListService} nameListService - The injected NameListService.
    */
   constructor(dashboardService: DashboardService) {
-    // Initialize switches values
+    // Initialize values
     this.control = {
       flaps: 0,
       landing_gear: 0
