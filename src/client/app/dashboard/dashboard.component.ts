@@ -59,6 +59,7 @@ export class DashboardComponent {
       },
       // on error
       (error: string) => {
+        console.error('ERROR:: Something went wrong with the socket.');
         console.error(error);
       },
       // on close
@@ -104,8 +105,8 @@ export class DashboardComponent {
       } else {
         this.avTelemetry.airspeed -= this.avTelemetry.airspeed / this.packagesReceived;
         this.avTelemetry.airspeed += response.telemetry.airspeed / this.packagesReceived;
+        this.avTelemetry.airspeed = Math.floor(this.avTelemetry.airspeed * 100) / 100;
       }
-      this.avTelemetry.airspeed = Math.floor(this.avTelemetry.airspeed * 100) / 100;
       this.telemetry.airspeed = response.telemetry.airspeed;
 
       // Set altitude average

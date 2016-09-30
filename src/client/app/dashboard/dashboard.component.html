@@ -3,15 +3,15 @@
   <sd-gauge class="gauge leftGauge" [amount]="telemetry.airspeed" 
         [bigNeedleDeg]="telemetry.airspeed*360/500" [isSpeed]="true"></sd-gauge>
   <div class="infoPanel leftInfo">
-    <div class="min"> Minimum </div>
-    <div class="max"> Maximum </div>
+    <div class="min"> 0 </div>
+    <div class="max"> 420 </div>
     <div class="average"> {{avTelemetry.airspeed}} </div>
   </div>
   <sd-gauge class="gauge rightGauge" [amount]="telemetry.altitude"
         [bigNeedleDeg]="(telemetry.altitude)*360/1000" 
         [smallNeedleDeg]="telemetry.altitude*360/10000" [isSpeed]="false"></sd-gauge>
   <div class="infoPanel rightInfo">
-    <div class="min"> Minimum </div>
+    <div class="min"> 0 </div>
     <div class="max"> Maximum </div>
     <div class="average"> {{avTelemetry.altitude}} </div>
   </div>
